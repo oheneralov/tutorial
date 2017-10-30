@@ -9,8 +9,10 @@ class LeftMenu extends Component {
   componentDidMount(){
 	  var self = this;
 	  $.get('backend/leftmenu', function(data){
-		  //data = ["one", "two", "three"];
-		  self.setState({'leftMenu': data});
+		  data = ["Home", "Introduction", "About"];
+		  let listItems = data.map((item) => 
+	      <li key={item}><a href="">{item}</a></li>);
+		  self.setState({'leftMenu': listItems});
 	  })
 	   .done(function() {
          console.log( "Connection successful!" );
@@ -25,7 +27,7 @@ class LeftMenu extends Component {
   }
   render() {
     return (
-      <div className="leftmenu">{this.state.leftMenu}</div>
+      <div className="leftmenu"><ul style={{listStyle:"none"}}>{this.state.leftMenu}</ul></div>
     );
   }
 }

@@ -34,6 +34,18 @@
 	flex-direction: row;
 	
 	}
-	.leftmenu{
-		width: 100px;
+	
+.leftmenu{
+	width: 200px;
+	background-color: #f1f1f1;
 	}
+
+.leftmenu ul{
+	text-align: left;
+	}
+
+.content {
+    margin-left: 10px;
+}	
+
+	
