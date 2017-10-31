@@ -17,6 +17,13 @@ app.get('/backend/leftmenu', function(req, res){
 	
 });
 
+app.get('/backend/content/:id', function(req, res){
+	//read data from mongodb and return the result
+	var id = req.params.id;
+	res.send(JSON.stringify(id));
+	
+});
+
 try{
     app.listen(8081);
 }

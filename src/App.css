@@ -36,16 +36,20 @@
 	}
 	
 .leftmenu{
-	width: 200px;
 	background-color: #f1f1f1;
 	}
-
-.leftmenu ul{
+	
+.leftmenu button{
+	width: 150px;
 	text-align: left;
+	}
+	
+.leftmenu ul{
+	padding-left: 15px;
 	}
 
 .content {
-    margin-left: 10px;
+    margin-left: 25px;
 }	
 
 	
