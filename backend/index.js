@@ -1,4 +1,5 @@
 var express = require('express');
+var tutorial = require('./tutorialdb');
 
 var app = express();
 app.use(express.static('../build'));
@@ -13,14 +14,27 @@ app.get('/', function(req, res){
 
 app.get('/backend/leftmenu', function(req, res){
 	//read data from mongodb and return the result
-	res.send(JSON.stringify(['0ne','two','three','four']));
+	var db = new tutorial.TutorialDB();
+	//res.type('json'); 
+	db.getMenuItems(function(err, result) {
+          if (err) throw err;
+          //console.log(result);
+          console.log(result);
+	      res.json(JSON.stringify(result));
+		  
+        });
 	
 });
 
 app.get('/backend/content/:id', function(req, res){
 	//read data from mongodb and return the result
 	var id = req.params.id;
-	res.send(JSON.stringify(id));
+	var db = new tutorial.TutorialDB();
+	db.getContentByMenu(id, function(err, result) {
+          if (err) throw err;
+          console.log(result);
+		  res.json(JSON.stringify(result));
+        });
 	
 });
 

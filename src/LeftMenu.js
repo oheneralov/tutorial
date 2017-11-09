@@ -9,11 +9,18 @@ class LeftMenu extends Component {
   }
   
   loadContent(event){
-	  var contentUrl = $(event.target).text();
+	  //default value
+	  var contentUrl = "Home";
+	  if (event != null){
+		  contentUrl = $(event.target).text();
+	  }
+	  
 	  var self = this;
 	  $.get('backend/content/' + contentUrl, function(content){
 		  $(".content").empty();
-		  $(".content").append(content);
+		  var text = JSON.parse(content);
+		  console.log(text);
+		  $(".content").append(text[0].content);
 		  self.setState();
 	  })
 	  .done(function() {
@@ -26,25 +33,31 @@ class LeftMenu extends Component {
          console.log( "finished loading content" );
       });
   }
+  
   componentDidMount(){
 	  var self = this;
 	  $.get('backend/leftmenu', function(menuData){
 		  var menu = ["Data types", "Regular expressions", "Arrays", "Classes", "Database"];
 		  try{
+			  
 		      menu = JSON.parse(menuData);
+			  console.log(menu);
 		  }
 		  catch(e){
 			  console.log("Error! Unable to load data for menu!");
+			  console.log(e.message);
+			  
 		  }
 		  let listItems = menu.map((item) => 
-	      <li key={item}><button onClick={self.loadContent}>{item}</button></li>);
+	      <li key={item.menu}><button onClick={self.loadContent}>{item.menu}</button></li>);
 		  self.setState({'leftMenu': listItems});
 	  })
 	   .done(function() {
          console.log( "Connection successful!" );
+		 self.loadContent(null);
        })
        .fail(function() {
-         console.log( "error" );
+         console.log( "error getting menu!" );
        })
       .always(function() {
          console.log( "finished" );
