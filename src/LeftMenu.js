@@ -18,7 +18,12 @@ class LeftMenu extends Component {
 	  var self = this;
 	  $.get('backend/content/' + contentUrl, function(content){
 		  $(".content").empty();
-		  var text = JSON.parse(content);
+		  console.log("content is", content);
+		  var text = "";
+		  if (content){
+			  text = JSON.parse(content);
+		  }
+		  
 		  console.log(text);
 		  $(".content").append(text[0].content);
 		  self.setState();

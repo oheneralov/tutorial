@@ -12,6 +12,11 @@ app.get('/', function(req, res){
 	
 });
 
+app.get('/backend/administrator', function(req, res){
+	res.send('administrator');
+	
+});
+
 app.get('/backend/leftmenu', function(req, res){
 	//read data from mongodb and return the result
 	var db = new tutorial.TutorialDB();
